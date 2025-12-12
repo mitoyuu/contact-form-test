@@ -15,8 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('content')->unique();
-            // 重複なしが必要？不要なら削除する　->unique()　↑
+            $table->string('content');
             $table->timestamps();
         });
     }

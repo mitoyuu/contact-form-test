@@ -15,11 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $contents = [
-            '商品のお届けについて',
-            '商品の交換について',
-            '商品トラブル',
-            'ショップへのお問い合わせ',
-            'その他',
+            '1.商品のお届けについて',
+            '2.商品の交換について',
+            '3.商品トラブル',
+            '4.ショップへのお問い合わせ',
+            '5.その他',
         ];
 
         foreach ($contents as $content) {

@@ -63,7 +63,7 @@
                 <tr class="confirm-table__row">
                     <th class="confirm-table__header">お問い合わせの種類</th>
                     <td class="confirm-table__text">
-                        {{ $contact['category_id'] }}
+                        {{ $contact['category_name'] }}
                         <input type="hidden" name="category_id" value="{{ $contact['category_id'] }}" readonly />
                     </td>
                 </tr>
@@ -79,8 +79,10 @@
             <button class="form__button-submit" type="submit">送信</button>
         </div>
     </form>
-    <form action="/" method="GET">
-        <button class="form__button-back">修正する</button>
+    <form action="/" method="POST">
+        @csrf
+        <button class="form__button-back" type="submit">修正する</button>
     </form>
+
 </div>
 @endsection

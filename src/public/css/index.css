@@ -1,177 +1,160 @@
+/* ================================
+   Contact Form Layout
+=================================== */
 
-/* 下記ジェミニより */
-/* index.css に追加または修正 */
-.form__group-content {
-    display: flex;
-    /* これで子要素を横並びにします */
-    flex-wrap: wrap;
-    /* 必要に応じて折り返しを許可 */
-    width: 600px;
-    /* 入力欄全体の幅（フォームタイトル横の幅に合わせる） */
-}
-
-.form__input--name-group {
-    width: calc(50% - 10px);
-    /* 幅をほぼ半分に設定（間隔を考慮） */
-    margin-right: 20px;
-    /* 姓と名の間に間隔 */
-}
-
-.form__input--name-group:last-child {
-    margin-right: 0;
-}
-
-.form__input--text.name-input input {
-    width: 100%;
-    /* 親要素の幅いっぱいに広げる */
-}
-
-/* index.css に追加または修正 */
-.form__input--radio {
-    display: flex;
-    /* ラベルを横並びにする */
-    justify-content: flex-start;
-}
-
-.form__input--radio label {
-    margin-right: 30px;
-    /* 各選択肢の間に間隔 */
-    display: flex;
-    align-items: center;
-}
-
-.form__input--radio input[type="radio"] {
-    width: 20px;
-    /* ラジオボタンのサイズ調整 */
-    height: 20px;
-    margin-right: 5px;
-    border: 1px solid #ddd;
-    /* デフォルトのinputスタイルを上書きしないように注意 */
-}
-/* index.css に追加または修正 */
-.tel-group {
-    display: flex;
-    /* 子要素を横並びにする */
-    align-items: center;
-    /* 要素を垂直方向の中央に揃える */
-}
-
-.tel-group input {
-    width: calc((600px - 40px) / 3);
-    /* 600pxからハイフンの幅2つ分を引いて3分割 */
-    margin: 0 5px;
-    /* 必要に応じて左右にマージン */
-}
-
-.tel-group span {
-    margin: 0 5px;
-    /* ハイフンの左右にマージン */
-}
-
-/* フォームの全体的な入力幅の指定（必要であれば） */
-/* form__input--text input の幅指定を上書きまたは調整 */
-.form__group-content .tel-group {
-    width: 600px;
-    /* 電話番号入力欄全体の幅を他の入力欄に合わせる */
-}
-/* index.css 内の .form__group 関連の修正 */
-.form__group {
-    display: flex;
-    /* justify-content: space-between; の代わりに flex-start にしても良い */
-    margin-bottom: 20px;
-    /* 行間の調整 */
-    align-items: flex-start;
-    /* 項目名と入力内容の垂直位置を合わせる */
-}
-
-.form__group-title {
-    width: 20%;
-    /* 項目名の幅を固定 */
-    text-align: left;
-    /* 項目名を左寄せ */
-    padding-top: 10px;
-    /* 入力欄と上端を合わせるための調整 */
-}
-
-.form__group-content {
-    width: 80%;
-    /* 入力内容の幅を固定 */
-    /* width: 600px; としても良いが、親のformの幅によるので、%で調整するのが一般的 */
-    display: flex;
-    /* 上記の通り子要素を横並びにするために使用 */
-    flex-direction: column;
-    /* デフォルトは縦並びで、必要に応じて子要素を横並びにする */
-}
-
-/* 元々のコード */
 .contact-form__content {
+    max-width: 900px;
     margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
+    padding: 60px 20px;
 }
 
-.contact-form__heading {
+.contact-form__heading h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+    color: #7a6252;
     margin-bottom: 40px;
-    text-align: center;
 }
 
-.form {
-    margin: 0 auto;
-    width: 70%;
-    text-align: center;
-}
+/* ================================
+   Form Group
+=================================== */
 
 .form__group {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+}
+
+.form__group-title {
+    width: 25%;
+    font-size: 16px;
+    color: #7a6252;
+}
+
+.form__label--item {
+    font-weight: 600;
 }
 
 .form__label--required {
-    margin-left: 5px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    background: #fafafa;
-    color: red;
+    color: #e06b6b;
+    margin-left: 4px;
 }
 
-.form__error {
-    height: 20px;
-    color: #ff0000;
-    text-align: left;
+.form__group-content {
+    width: 70%;
 }
+
+/* ================================
+   Text Inputs
+=================================== */
 
 .form__input--text input,
 .form__input--select select,
 .form__input--textarea textarea {
-    padding: 10px;
-    width: 600px;
-    border: 1px solid #ddd;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    background: #f5f3f1;
+    font-size: 14px;
     border-radius: 3px;
+    color: #6a6a6a;
+    box-sizing: border-box;
+}
 
+.form__input--text {
+    margin-bottom: 12px;
+}
+
+/* 2つ並びの名前欄 */
+.form__group-content .form__input--text:first-child,
+.form__group-content .form__input--text:nth-child(3) {
+    width: 48%;
+    display: inline-block;
+}
+
+/* ================================
+   Radio Buttons
+=================================== */
+
+.form__input--radio label {
+    margin-right: 25px;
+    font-size: 15px;
+    color: #6a6a6a;
+}
+
+.form__input--radio input {
+    margin-right: 8px;
+}
+
+/* ================================
+   Tel Inputs
+=================================== */
+
+.tel-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tel-group input {
+    width: 120px;
+}
+
+.tel-group span {
+    font-size: 16px;
+    color: #7a6252;
+}
+
+/* ================================
+   Select Box
+=================================== */
+
+.form__input--select select {
     appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' width='24' xmlns='http://www.w3.org/2000/svg'><polygon points='7,9 12,14 17,9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
 }
 
-.form__input--text input {
-    height: 40px;
-}
+/* ================================
+   Textarea
+=================================== */
 
 .form__input--textarea textarea {
     height: 180px;
+    resize: none;
 }
 
+/* ================================
+   Error Message
+=================================== */
+
+.form__error {
+    color: #e06b6b;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* ================================
+   Submit Button
+=================================== */
+
 .form__button {
-    margin-top: 30px;
+    text-align: center;
+    margin-top: 50px;
 }
 
 .form__button-submit {
-    padding: 10px;
-    width: 30%;
-    height: 50px;
-    border: none;
-    border-radius: 3px;
-    background: #917960;
+    background: #7a6252;
     color: #fff;
+    padding: 14px 50px;
+    border: none;
+    font-size: 16px;
+    border-radius: 3px;
     cursor: pointer;
 }
 
+.form__button-submit:hover {
+    opacity: 0.8;
+}

@@ -11,7 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
+
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Http\Responses\LoginResponse;
+use Laravel\Fortify\Http\Responses\RegisterResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -28,19 +32,36 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Fortify::createUsersUsing(CreateNewUser::class);
-        Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
-        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+    // 新規ユーザの登録処理
+    Fortify::createUsersUsing(CreateNewUser::class);
 
-        RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
+    // GETメソッドで/registerにアクセスしたときに表示するviewファイル
+    Fortify::registerView(function () {
+        return view('auth.register');
+    });
+    // GETメソッドで/loginにアクセスしたときに表示するviewファイル
+    Fortify::loginView(function () {
+        return view('auth.login');
+    });
 
-            return Limit::perMinute(5)->by($throttleKey);
+        // ---------- ③ ログイン後のリダイレクト ----------
+        $this->app->singleton(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->intended('/admin');
+                }
+            };
         });
 
-        RateLimiter::for('two-factor', function (Request $request) {
-            return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        // ---------- ④ 会員登録後のリダイレクト ----------
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                    return redirect('/admin');
+                }
+            };
         });
     }
 }

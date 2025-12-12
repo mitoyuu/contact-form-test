@@ -28,6 +28,7 @@ class ContactController extends Controller
 
         // ★ カテゴリ名を取得する処理を追加 ★
         $category = Category::find($contact['category_id']);
+        $contact['category_name'] = $category->content;
 
         return view('contact.confirm', compact('contact'));
     }
